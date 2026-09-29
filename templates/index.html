@@ -31,13 +31,15 @@
 
     header {
       margin-bottom: 24px;
+      border-left: 4px solid #2563eb;
+      padding-left: 14px;
     }
 
     h1 {
       font-size: 24px;
       font-weight: 700;
       color: #0f172a;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .subtitle {
@@ -51,14 +53,14 @@
       border-radius: 8px;
       padding: 24px;
       margin-bottom: 20px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
 
     label {
       display: block;
       font-weight: 600;
       font-size: 13px;
-      color: #334155;
+      color: #1e3a8a;
       margin-bottom: 8px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -73,15 +75,17 @@
     input[type="number"] {
       flex: 1;
       padding: 10px 14px;
-      border: 1px solid #cbd5e1;
+      border: 1.5px solid #cbd5e1;
       border-radius: 6px;
       font-size: 16px;
       color: #0f172a;
       outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
 
     input[type="number"]:focus {
       border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     }
 
     .presets {
@@ -91,26 +95,27 @@
     }
 
     .preset-btn {
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      color: #475569;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1d4ed8;
       padding: 6px 12px;
       border-radius: 6px;
       font-size: 12px;
       font-weight: 500;
       cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
     }
 
     .preset-btn:hover {
-      background: #e2e8f0;
-      color: #0f172a;
+      background: #dbeafe;
+      border-color: #93c5fd;
     }
 
     .summary-box {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 6px;
-      padding: 16px;
+      background: #f0f7ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 18px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -119,25 +124,33 @@
 
     .summary-title {
       font-size: 13px;
+      color: #1e40af;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .summary-subtitle {
+      font-size: 12px;
       color: #64748b;
-      font-weight: 500;
+      margin-top: 2px;
     }
 
     .summary-value {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 700;
-      color: #0f172a;
+      color: #1d4ed8;
     }
 
     .section-header {
       font-size: 13px;
       font-weight: 600;
-      color: #475569;
+      color: #1e3a8a;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      margin: 20px 0 10px 0;
+      margin: 22px 0 10px 0;
       padding-bottom: 6px;
-      border-bottom: 1px solid #f1f5f9;
+      border-bottom: 1.5px solid #e0e7ff;
     }
 
     table {
@@ -177,8 +190,9 @@
     }
 
     .tag-active {
-      background: #dcfce7;
-      color: #15803d;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
     }
 
     .tag-inactive {
@@ -219,7 +233,7 @@
       <div class="summary-box">
         <div>
           <div class="summary-title">Monthly Take-Home Pay</div>
-          <div style="font-size: 12px; color: #94a3b8;">Transferred to employee</div>
+          <div class="summary-subtitle">Net amount credited to employee account</div>
         </div>
         <div class="summary-value" id="netTakeHome">₹46,200</div>
       </div>
@@ -240,8 +254,8 @@
             <td class="val-col" id="specialAllowance">₹10,700</td>
           </tr>
           <tr class="total-row">
-            <td class="label-col">Gross Salary</td>
-            <td class="val-col" id="grossSalary">₹48,200</td>
+            <td class="label-col" style="color: #1e3a8a;">Gross Salary</td>
+            <td class="val-col" id="grossSalary" style="color: #1d4ed8;">₹48,200</td>
           </tr>
         </tbody>
       </table>
@@ -265,13 +279,13 @@
             <td class="val-col" id="pt">₹200</td>
           </tr>
           <tr class="total-row">
-            <td class="label-col">Total Deductions</td>
-            <td class="val-col" id="totalDeductions" style="color: #dc2626;">₹2,000</td>
+            <td class="label-col">Total Employee Deductions</td>
+            <td class="val-col" id="totalDeductions" style="color: #b91c1c;">₹2,000</td>
           </tr>
         </tbody>
       </table>
 
-      <div class="section-header">Employer Contributions (Part of CTC)</div>
+      <div class="section-header">Employer Statutory Contributions (Part of CTC)</div>
       <table>
         <tbody>
           <tr>
