@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offrd - Salary Breakdown Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 2.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .calculator-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      margin-bottom: 2rem;
+    }
+
+    .input-section {
+      margin-bottom: 2rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      color: #e2e8f0;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .currency-symbol {
+      position: absolute;
+      left: 1rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 2.5rem;
+      background: #0f172a;
+      border: 1.5px solid #334155;
+      border-radius: 0.75rem;
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="number"]:focus {
+      border-color: var(--primary);
+    }
+
+    .quick-buttons {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .quick-btn {
+      background: #334155;
+      border: none;
+      color: #cbd5e1;
+      padding: 0.4rem 0.85rem;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .quick-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .hero-stat {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .hero-stat .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-stat .stat-val {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-green);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .section-card {
+      background: #151f32;
+      border: 1px solid #283548;
+      border-radius: 0.85rem;
+      padding: 1.25rem;
+    }
+
+    .section-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .row-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #1e293b;
+      font-size: 0.92rem;
+    }
+
+    .row-item:last-child {
+      border-bottom: none;
+    }
+
+    .row-label {
+      color: #94a3b8;
+    }
+
+    .row-val {
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.35rem;
+      font-weight: 700;
+    }
+
+    .tag-active {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+    }
+
+    .tag-inactive {
+      background: rgba(148, 163, 184, 0.15);
+      color: #94a3b8;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">Offrd Product Engineering Intern</span>
+      <h1>Salary Breakdown Calculator</h1>
+      <p class="subtitle">Indian Statutory Payroll Engine with Real-Time EPF & ESI Thresholds</p>
+    </header>
+
+    <div class="calculator-card">
+      <div class="input-section">
+        <label for="annualCtc">Annual Cost to Company (CTC)</label>
+        <div class="input-wrapper">
+          <span class="currency-symbol">₹</span>
+          <input type="number" id="annualCtc" value="600000" min="10000" step="10000">
+        </div>
+        <div class="quick-buttons">
+          <button class="quick-btn" onclick="setCtc(180000)">₹1.8 LPA (ESI Active)</button>
+          <button class="quick-btn" onclick="setCtc(300000)">₹3.0 LPA</button>
+          <button class="quick-btn" onclick="setCtc(600000)">₹6.0 LPA</button>
+          <button class="quick-btn" onclick="setCtc(1200000)">₹12.0 LPA</button>
+          <button class="quick-btn" onclick="setCtc(2400000)">₹24.0 LPA (Executive)</button>
+        </div>
+      </div>
+
+      <div class="hero-stat">
+        <div>
+          <div class="stat-label">Estimated Monthly Take-Home</div>
+          <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.2rem;">Net transferred to employee bank account</div>
+        </div>
+        <div class="stat-val" id="netTakeHome">₹46,200</div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Earnings Section -->
+        <div class="section-card">
+          <div class="section-title" style="color: #60a5fa;">
+            <span>Monthly Earnings</span>
+            <span id="grossBadge" style="font-size: 0.8rem; color: #94a3b8;">Gross: ₹48,200</span>
+          </div>
+          <div class="row-item">
+            <span class="row-label">Basic Salary (50%)</span>
+            <span class="row-val" id="basic">₹25,000</span>
+          </div>
+          <div class="row-item">
+            <span class="row-label">HRA (50% of Basic)</span>
+            <span class="row-val" id="hra">₹12,500</span>
+          </div>
+          <div class="row-item">
+            <span class="row-label">Special Allowance (Balancing)</span>
+            <span class="row-val" id="specialAllowance">₹10,700</span>
+          </div>
+          <div class="row-item" style="border-top: 1px dashed #334155; margin-top: 0.5rem; padding-top: 0.75rem;">
+            <span class="row-label" style="font-weight: 700; color: #e2e8f0;">Gross Salary</span>
+            <span class="row-val" id="grossSalary" style="color: #60a5fa;">₹48,200</span>
+          </div>
+        </div>
+
+        <!-- Deductions Section -->
+        <div class="section-card">
+          <div class="section-title" style="color: #f87171;">
+            <span>Employee Deductions</span>
+            <span id="deductionsTotal" style="font-size: 0.8rem; color: #f87171;">Total: ₹2,000</span>
+          </div>
+          <div class="row-item">
+            <span class="row-label">Employee EPF (12%)</span>
+            <span class="row-val" id="employeeEpf">₹1,800</span>
+          </div>
+          <div class="row-item">
+            <span class="row-label">Employee ESI (0.75%)</span>
+            <span class="row-val" id="employeeEsi">₹0 <span class="tag tag-inactive" id="esiTag">Inactive</span></span>
+          </div>
+          <div class="row-item">
+            <span class="row-label">Professional Tax (PT)</span>
+            <span class="row-val" id="pt">₹200</span>
+          </div>
+          <div class="row-item" style="border-top: 1px dashed #334155; margin-top: 0.5rem; padding-top: 0.75rem;">
+            <span class="row-label" style="color: #94a3b8;">Employer EPF (Part of CTC)</span>
+            <span class="row-val" id="employerEpf">₹1,800</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      Offrd Evaluation Exercise • Python + Flask Backend with Pytest Coverage
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById("annualCtc");
+
+    function formatINR(val) {
+      return "₹" + Math.round(val).toLocaleString("en-IN");
+    }
+
+    async function updateBreakdown() {
+      const ctc = parseFloat(input.value);
+      if (!ctc || ctc <= 0) return;
+
+      try {
+        const response = await fetch("/api/calculate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ annual_ctc: ctc })
+        });
+        const res = await response.json();
+        if (!res.success) return;
+
+        const d = res.data;
+        document.getElementById("netTakeHome").textContent = formatINR(d.net_take_home);
+        document.getElementById("grossBadge").textContent = "Gross: " + formatINR(d.gross_salary);
+        document.getElementById("basic").textContent = formatINR(d.basic);
+        document.getElementById("hra").textContent = formatINR(d.hra);
+        document.getElementById("specialAllowance").textContent = formatINR(d.special_allowance);
+        document.getElementById("grossSalary").textContent = formatINR(d.gross_salary);
+
+        document.getElementById("employeeEpf").textContent = formatINR(d.employee_epf);
+        document.getElementById("pt").textContent = formatINR(d.professional_tax);
+        document.getElementById("employerEpf").textContent = formatINR(d.employer_epf);
+        document.getElementById("deductionsTotal").textContent = "Total: " + formatINR(d.total_employee_deductions);
+
+        const esiTag = document.getElementById("esiTag");
+        if (d.employee_esi > 0) {
+          document.getElementById("employeeEsi").innerHTML = `${formatINR(d.employee_esi)} <span class="tag tag-active">Active (≤ ₹21k)</span>`;
+        } else {
+          document.getElementById("employeeEsi").innerHTML = `₹0 <span class="tag tag-inactive">> ₹21k Gross</span>`;
+        }
+      } catch (err) {
+        console.error("Calculation failed:", err);
+      }
+    }
+
+    function setCtc(val) {
+      input.value = val;
+      updateBreakdown();
+    }
+
+    input.addEventListener("input", updateBreakdown);
+    updateBreakdown();
+  </script>
+</body>
+</html>
