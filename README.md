@@ -93,7 +93,7 @@ offrd-salary-calculator/
 
 ---
 
-## What I Would Do With More Time
+## What I Would Do If I Had More Time
 
 1. **Customizable Company Allowances:**
    Allow employers to configure custom allowance structures (such as Conveyance Allowance, Medical Allowance, or Performance Bonuses) instead of routing the entire balancing figure into Special Allowance.
